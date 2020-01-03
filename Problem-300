@@ -1,0 +1,80 @@
+/*
+LeetCode: unsuccessful: 16/24 cases.
+
+Approach:
+
+I thought that taking all the elements that are less than a selected element would give us a count.
+
+do this for all the rows and the count that is maximum is the answer.
+
+But it does not seem to work.
+
+*/
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        
+        HashSet<Integer> hm = new HashSet<>();
+        
+        if(nums.length==0||nums.length==1) return nums.length;
+  
+        int [][] result = new int [nums.length][nums.length+2];
+        
+        for(int i=0;i<nums.length;i++)
+        {
+            result[i][0]=1;
+        }
+        
+        int max=Integer.MIN_VALUE;
+        int temp1=max;
+        for(int i=nums.length-1;i>=0;i--)
+        {
+            for(int j=1;j<nums.length+1;j++)
+            {         
+                
+                if(j-1>i) continue ;
+                if(hm.contains(nums[j-1]))
+                {
+                    result[i][j]=result[i][j-1];
+                    continue;
+                }
+                else {
+                    hm.add(nums[j-1]);
+                }
+                
+                if(nums[i]>nums[j-1])
+                {
+  
+                    if((j>1)&&nums[j-1]>nums[j-2])
+                    {
+                        int temp=result[i][j-1]+1;
+                        if(max<temp) max= temp;
+                        result[i][j]=temp;
+                        
+                    }
+                    else{
+                        if(j<=1) 
+                        {
+                            int temp=result[i][j-1]+1;
+                            result[i][j]=temp;
+                            if(temp>max) max= temp;
+                            continue;
+                        }
+                            result[i][j]=result[i][j-1];
+
+                    }
+                }
+                else{
+                    result[i][j]=result[i][j-1];
+                }
+            }
+            
+            hm = new HashSet<>();
+        }
+        
+ 
+   
+        if(max==temp1) return 1;
+        return max;
+    }
+}
