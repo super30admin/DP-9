@@ -25,7 +25,7 @@ class Solution {
                     max= Math.max(dp[j],max);
                 }
             }
-            dp[i] = max+1;
+            dp[i] = max+dp[i];
             totalmax = Math.max(dp[i],totalmax);
         }
         return totalmax;
