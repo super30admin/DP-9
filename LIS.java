@@ -13,7 +13,7 @@ class Solution {
     }
     
     //time - O(n^2)
-    //space - O(n^2)
+    //space - O(n)
     private int lisDP(int[] nums) {
         int[] result = new int[nums.length];
         Arrays.fill(result, 1); //every element is an increasing sub sequence of length 1
