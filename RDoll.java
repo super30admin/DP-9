@@ -34,6 +34,10 @@ public class RDoll {
     /**
      * // Time Complexity : O(N log N) where N is number of envelopes
         // Space Complexity : O(N)
+
+        //Approach:
+        1. Sort envelopes array as per the width (ascending order) and if width is same then as per 
+        descending order of height.
      * 
      * public int maxEnvelopes(int[][] envelopes) {
         
