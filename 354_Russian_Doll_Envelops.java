@@ -1,3 +1,18 @@
+    /*  Explanation
+    # Leetcode problem link : https://leetcode.com/problems/russian-doll-envelopes/
+    Time Complexity for operators : o(n^2) .. n is the length of the ENVELOPS
+    Extra Space Complexity for operators : o(n)
+    Did this code successfully run on Leetcode : NA
+    Any problem you faced while coding this : No
+# Your code here along with comments explaining your approach
+        # Basic approach : 
+        # Optimized approach: 
+                              
+            # 1. 
+                    A) 
+
+    */  
+
 class Solution {
     public int maxEnvelopes(int[][] envelopes) {
         if(envelopes == null || envelopes.length == 0)
