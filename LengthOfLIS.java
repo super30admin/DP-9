@@ -1,4 +1,4 @@
-// Time Complexity : The time complexity is O(n2) where n is the length of array
+// Time Complexity : The time complexity is O(nlogn) where n is the length of array
 // Space Complexity : The space complexity is O(n) where n is the length of array
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
@@ -12,24 +12,38 @@ class Solution {
         int n = nums.length;
 
         int[] dp = new int[n];
-        dp[0] = 1;
+        dp[0] = nums[0];
+        int index = 1;
 
         for(int i=1;i<n;i++){
-            //find numbers less than the current number
-            for(int j=0;j<i;j++){
-                if(nums[j] < nums[i]){
-                    dp[i] = Math.max(dp[i],dp[j]+1);
-                }
+            //if the current number forms an increasing sequence
+            if(dp[index-1] < nums[i]){
+                dp[index] = nums[i];
+                index++;
             }
-            if(dp[i] == 0){
-                dp[i] = 1;
+            // if the current number doesnt form an increasing sequence, do binary search to replace the closest next element
+            else{
+                int idx = binarySearch(dp,0,index-1,nums[i]);
+                dp[idx] = nums[i];
             }
         }
+        return index;
+    }
 
-        int max = 0;
-        for(int i=0;i<n;i++){
-            max = Math.max(max,dp[i]);
+    public int binarySearch(int[] nums,int start,int end,int target){
+
+        while(start <= end){
+            int mid = start + (end-start)/2;
+            if(nums[mid] == target){
+                return mid;
+            }
+            else if(nums[mid] > target){
+                end = mid-1;
+            }
+            else{
+                start = mid+1;
+            }
         }
-        return max;
+        return start;
     }
 }
