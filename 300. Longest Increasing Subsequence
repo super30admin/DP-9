@@ -1,0 +1,22 @@
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        n = len(nums)
+        # initialize dp array
+        dp = [1 for i in range(n)]
+        
+        # iterate from 2nd element to the last element
+        for i in range(1, n):
+            # iterate from first element to ith element
+            for j in range(0,i):
+                # check whether the element at pos i is greater than element at pos j
+                # then update value at ith pos in dp array
+                if(nums[i] > nums[j] and dp[i] < dp[j] + 1):
+                    dp[i] = dp[j] + 1;
+        return max(dp);
+    
+    '''
+    time complexity = o(n2)
+    space complexity = O(n)
+    '''
+        
+        
