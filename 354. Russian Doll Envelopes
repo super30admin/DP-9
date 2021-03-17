@@ -1,0 +1,24 @@
+class Solution:
+    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
+        # sort the envelopes 
+        envelopes = sorted(envelopes);
+        n = len(envelopes)
+        
+        # initialize the dp array
+        dp = [1 for i in range(n)];
+        
+        # iterate from second envelope through last envelope
+        for i in range(1,n):
+            w1, h1 = envelopes[i];
+            # iterate from first envelope to current envelope
+            for j in range(i):
+                w2,h2 = envelopes[j];
+                if( w1 > w2 and h1 > h2 and dp[i] < dp[j] + 1):
+                    dp[i] = dp[j] + 1;
+        return max(dp)
+    
+    '''
+    time complexity = O(n2)
+    space complexity = O(n)
+    '''
+        
