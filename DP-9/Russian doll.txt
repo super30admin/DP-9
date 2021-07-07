@@ -1,0 +1,28 @@
+// executed on leet code
+// time comp = O(n2) n= no of envelopes
+//space = O(n)
+class Solution {
+    public int maxEnvelopes(int[][] a) {
+        if(a.length==0) return 0;
+        if(a[0].length==0) return 0;
+        int[] dp=new int[a.length];
+        Arrays.sort(a,new java.util.Comparator<int[]>(){// to sort the array based on width
+            public int compare(int[] x,int[] y)
+            {
+                return Integer.compare(x[0],y[0]);
+            }
+        });
+        for(int i=0;i<a.length;i++) // same logic as longest subseq
+        {
+            for(int j=0;j<=i;j++)
+            {
+                if(a[i][1]>a[j][1] && a[i][0]>a[j][0])
+                {
+                    dp[i]=Math.max(dp[j]+1,dp[i]);
+                }
+            }
+        }
+        Arrays.sort(dp);
+        return dp[a.length-1]+1;
+    }
+}

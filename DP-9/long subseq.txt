@@ -1,0 +1,23 @@
+// solution executed on leet code
+// Time comp = O(n2) n=no of ele in arr
+//space comp = O(n)
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        if(nums.length==0) return 0;
+        
+        int[] dp=new int[nums.length];// to store the max val till that index
+        //dp[0]=1;
+        for(int i=0;i<nums.length;i++)
+        {
+            for(int j=0;j<=i;j++)
+            {
+                if(nums[i]>nums[j])
+                {
+                    dp[i]=Math.max(dp[i],dp[j]+1);
+                }
+            }
+        }
+        Arrays.sort(dp);
+        return dp[nums.length-1]+1;
+    }
+}
