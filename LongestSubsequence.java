@@ -24,6 +24,8 @@ public class LongestSubsequence {
     }
 
     // Optimized approach
+    // TC : O(n * log n)
+    // SC : O(n)
     public int lengthOfLIS2(int[] nums){
         if(nums == null || nums.length == 0) return 0;
 
