@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class LongestSybsequence {
+public class LongestSubsequence {
     // TC : O(n^2)
     // SC : O(n)
     public int lengthOfLIS(int[] nums) {
