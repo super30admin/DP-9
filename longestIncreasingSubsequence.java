@@ -37,6 +37,7 @@ class Solution {
 
 // Approach 2: Binary Search
 // TC: O(n log n)
+// SC: O(n)
 class Solution {
     public int lengthOfLIS(int[] nums) {
         ArrayList<Integer> sub = new ArrayList<>();
