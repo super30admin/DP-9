@@ -22,7 +22,7 @@ class Solution:
                 
 
 '''
-(no need to come up with the interview)
+(no need to come up with this in the interview)
 Algo for finding the longest length (not the exact sequence)
 Time: O(nlogn)
 Space: O(n)
