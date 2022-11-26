@@ -15,9 +15,8 @@ class Solution:
                 l += 1
             else:
                 bsIndex = self.binarySearch(arr, envelopes[i], 0, l - 1)
-                if bsIndex != -1:
-                    # print(bsIndex, arr, len(arr))
-                    arr[bsIndex] = envelopes[i]
+                # print(bsIndex, arr, len(arr))
+                arr[bsIndex] = envelopes[i]
         # print(envelopes)
         # print(arr)
         return l
