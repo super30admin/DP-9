@@ -40,13 +40,13 @@ class Solution {
     }
 }
 
-
+//Time Complexity - O(nlogn)
+//Space Complexity - O(n)
 //This solution will give us the length of the longest subsequence only. Not the exact subsequence
 /*
  * 1 - We build an effective array which works by the following way:
- * - We add the first element to this array. IF the incoming element is greater than the last element, then we add it 
- * to the array after the last element. If the element is not greater, then we find the net greater element than the element 
- * in iteration and perform BS to replace this element in the right index.
+ * - We add the first element to this array. IF the incoming element from the main array is greater than the added element, then we 
+ * append it to the effective array. If the element is not greater, then we find the next greater element & perform BS to replace this element at the right index.
  */
 class Solution {
     public int lengthOfLIS(int[] nums) {
