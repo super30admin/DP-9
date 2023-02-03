@@ -1,0 +1,40 @@
+//TimeComplexity.  nlogn
+//Spacecomplexity. O(n)
+
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+
+        list.add(nums[0]);
+        
+    
+        for(int i = 1; i < nums.length; i++ ){
+           
+            if(nums[i] > list.get(list.size()-1)){
+                list.add(nums[i]);
+            }else{
+                int j = binSearch(list,0,list.size()-1,nums[i]);
+                list.set(j,nums[i]);
+            }
+        }
+
+        
+        return list.size();
+    }
+
+    public int binSearch(List<Integer> list, int low, int high, int num){
+        
+        while(low <= high){
+        int mid = low + (high - low)/2;
+
+        if(list.get(mid) == num)return mid;
+        else if(list.get(mid) < num)low = mid+1;
+        else {
+            high = mid-1;
+        }
+        }
+        
+        return low;
+    }
+}
