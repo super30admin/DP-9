@@ -1,0 +1,33 @@
+//TimeCompelxity.    nlog(n)
+//SpaceComplexity.   O(2n)
+
+public int maxEnvelopes(int[][] envelopes) {
+        Arrays.sort(envelopes, (a,b) -> {
+            if(a[0] == b[0]){
+                return b[1]-a[1];
+            }else{
+                return a[0] - b[0];
+            }
+        });
+       
+       
+       List<Integer> list1 = new ArrayList<>();
+       List<Integer> list2 = new ArrayList<>();
+        list1.add(envelopes[0][1]);
+        list2.add(envelopes[0][0]);
+       for(int i = 1 ; i < envelopes.length; i++){
+            if(envelopes[i][1] > list1.get(list1.size()-1)){
+                list1.add(envelopes[i][1]);
+                list2.add(envelopes[i][0]);
+            }else if(envelopes[i][1] < list1.get(list1.size()-1)){
+                int j = 0;
+                while(envelopes[i][1] > list1.get(j) && envelopes[i][0] > list2.get(j)){
+                    j++;
+                }
+                list1.set(j,envelopes[i][1]);
+                list2.set(j,envelopes[i][0]);
+            }
+       }
+       return list1.size();
+    }
+}
