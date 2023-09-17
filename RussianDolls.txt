@@ -1,0 +1,46 @@
+/**
+Time Complexity - O(N log N)
+Space Complexity - O(N)
+ */
+class Solution {
+    public int maxEnvelopes(int[][] envelopes) {
+        Arrays.sort(envelopes, (arr1, arr2) -> {
+            if (arr1[0]  == arr2[0]) {
+                return arr2[1] - arr1[1];
+            } else {
+                return arr1[0] - arr2[0];
+            }
+        } );
+
+        int[] height = new int[envelopes.length];
+        for (int i=0; i< envelopes.length; i++) {
+            height[i] = envelopes[i][1];
+        }
+        return lengthOfLIS(height);
+    }
+
+
+     public int lengthOfLIS(int[] nums) {
+       int[] piles = new int[nums.length];
+       int numPiles = 0;
+       for (int num : nums) {
+           int l = 0;
+           int r = numPiles;
+
+           while (l < r) {
+               int mid = l + (r-l)/2;
+               if (piles[mid] < num) {
+                   l = mid +1;
+               } else {
+                   r = mid;
+               }
+           }
+          // System.out.println(l +"," +r +":"+ num +":" + numPiles);
+           piles[l] = num;
+           if (l == numPiles) {
+               numPiles++;
+           }
+       }
+        return numPiles;
+    }
+}
