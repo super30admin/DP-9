@@ -44,6 +44,7 @@ class Solution {
             }
             return a[0] - b[0];
         });
+
         arr[0] = envelopes[0][1];
         int le = 1;
         for (int i = 1; i < n; i++) {
@@ -52,7 +53,7 @@ class Solution {
                 le++;
             } else {
                 int bsIndex = binarySearch(arr, 0, le - 1, envelopes[i][1]);
-                arr[bsIndex] = envelopes[1][1];
+                arr[bsIndex] = envelopes[i][1];
             }
         }
         return le;
