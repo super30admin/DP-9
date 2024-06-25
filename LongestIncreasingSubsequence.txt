@@ -1,0 +1,38 @@
+//Time complexity: O(nlogn)
+//Space Complexity: O(n)
+//Aproach: Maintain an effective array to store the elements. When ever sequence is not increasing , 
+//get the index of current element and replace it in the effective array.
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int len=0;
+        int[] arr=new int[nums.length];
+        arr[0]=nums[0];
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]>arr[len]){
+                len++;
+                arr[len]=nums[i];
+            }
+            else {
+                int index=binarySearch(0, len, arr, nums[i]);
+                arr[index]=nums[i];
+            }
+        }
+        return len+1;
+    }
+
+    public int binarySearch(int left, int right, int[] arr, int target){
+        
+        int mid=0;
+        while(left<=right){
+            mid=left+(right-left)/2;
+            if(arr[mid]==target){
+                return mid;
+            }else if(arr[mid]<target){
+                left=mid+1;
+            }else{
+                right=mid-1;
+            }
+        }        
+        return right+1;
+    }
+}

@@ -1,0 +1,45 @@
+//Time Complexity: O(nlogn)
+//Space Comeplxity: O(n)
+//Approach: Similar to longest incresing subseq prob. Initially sort the elemnt based on 0th position.
+//In the first position sort the elemnts in descending order, reason to do this is to avoid (2,2) and (2,3) cant be considered because widths are same.
+class Solution {
+    public int maxEnvelopes(int[][] envelopes) {
+     Arrays.sort(envelopes, (a,b)->{
+            if(a[0]==b[0]){
+                    return b[1]-a[1];
+            }
+            return a[0]-b[0];
+        });    
+    //(1,2), (2,3), (2,1)
+    int len=0;
+    int arr[] = new int[envelopes.length];
+    arr[0]=envelopes[0][1];
+    for(int i=1;i<envelopes.length;i++){
+        if(envelopes[i][1]>arr[len]){
+            len++;
+            arr[len] = envelopes[i][1];
+        }
+        else {
+            int index = binarySearch(0, len, arr, envelopes[i][1]);
+            arr[index] = envelopes[i][1];
+        }
+    }
+    return len+1;
+}
+
+public int binarySearch(int left, int right, int[] arr, int target){
+    int mid=0;
+    while(left<=right){
+        mid=left+(right-left)/2;
+        if(arr[mid]==target){
+            return mid;
+        }
+        else if(arr[mid]<target){
+            left=mid+1;
+        }else{
+            right=mid-1;
+        }
+    }
+    return left;
+}
+}
