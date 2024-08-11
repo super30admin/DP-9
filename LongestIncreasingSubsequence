@@ -1,0 +1,80 @@
+T.c --> O(n^2)
+S.c --> O(n)
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int max = Integer.MIN_VALUE;
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp,1);
+        for(int i =0; i<n; i++){
+            for(int j =i+1; j<n; j++){
+                if(nums[i] < nums[j]){
+                  dp[j] = Math.max(dp[j],dp[i]+1);
+                }               
+            }
+        }
+        for(int i =0; i<n; i++){
+            max = Math.max(max,dp[i]);
+        }
+        return max;
+    }
+}
+
+************************************************************************************************
+T.c --> O(n^2)
+S.c --> O(n)
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int max = 1;
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp,1);
+        for(int i =1; i<n; i++){
+            for(int j =0; j<i; j++){
+                if(nums[i] > nums[j]){
+                  dp[i] = Math.max(dp[i],dp[j]+1);
+                }               
+            }
+            max = Math.max(max,dp[i]);
+        }
+        
+        return max;
+    }
+}
+************************************************************************************************
+T.c --> O(nlogn)
+S.c --> O(n)
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        result[0] = nums[0];
+        int len = 1;
+       for(int i =1; i<n; i++){
+         if(nums[i] > result[len-1]){
+             result[len] = nums[i];
+             len++;
+         }else{
+            int binaryindex = binarysearch(result,0,len-1,nums[i]);
+            result[binaryindex] = nums[i];
+         }
+       } 
+       return len;
+    }
+    private int binarysearch(int[] nums, int low, int high , int target){
+        while(low <= high){
+            int mid = low+(high-low)/2;
+            if(nums[mid] == target){
+                return mid;
+            }else if(nums[mid] < target){
+                low = mid+1;
+            }else{
+                high = mid -1;
+            }
+        }
+        return low;
+    }
+}
