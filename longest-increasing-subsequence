@@ -1,0 +1,69 @@
+// Time Complexity :O(n*n)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:1D array dp arroach
+
+
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);//filling the array 1 as every elemtn can one subsequent array
+        int max = 1;//as we initialize with 1 so max 1
+        for (int i = 1; i < n; i++) { 
+            for (int j = 0; j < i; j++) {//always reset to j to 0 because we explore all possiblitiles here
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);//local max where i is greater than jth ele
+                    max = Math.max(max, dp[i]);//global max
+                         }
+            }
+        }
+        return max;
+    }
+}
+
+
+
+
+
+// Time Complexity :O(nlogn)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach: array with binary search arroach
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        int[] arr = new int[n];
+        arr[0] = nums[0];//filling first ele
+        int length = 1;//length of array
+        for (int i = 1; i < n; i++) {
+            if (arr[length - 1] < nums[i]) {
+                 arr[length] = nums[i];//just adding new element to arr and incrementing length
+                length++;
+            } else {
+                 int idx = binarySearch(arr, 0, length - 1, nums[i]);//if it is less than last element from array need to find next greater element for that and replace
+                arr[idx] = nums[i];//updating its value
+            }
+        }
+        return length;
+    }
+//finding next greater elemtn of target to replace 
+    private int binarySearch(int[] arr,int low,int high,int target){
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(arr[mid] == target){
+            return mid;
+            }else if(arr[mid] > target){
+               high=mid+1;  
+            }else{
+               low=mid+1;
+            }
+        }
+        return low;
+    }
+}
+
