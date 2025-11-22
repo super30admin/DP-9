@@ -1,0 +1,36 @@
+// Time Complexity : O(n logn)
+// Space Complexity : O(n)
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        int[] arr = new int[n];
+        arr[0] = nums[0];
+
+        int idx = 1;
+        for(int i = 1; i < n; i++) {
+            if(nums[i] > arr[idx-1]) {
+                arr[idx] = nums[i];
+                idx++;
+            }
+            else {
+                int replaceIdx = binarySearch(arr, 0, idx-1, nums[i]);
+                arr[replaceIdx] = nums[i];
+            }
+        }
+        return idx;
+    }
+
+    private int binarySearch(int[] nums, int low, int high, int target) {
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
+            if(nums[mid] == target)
+                return mid;
+            else if(nums[mid] > target)
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+        return low;
+    }
+}
