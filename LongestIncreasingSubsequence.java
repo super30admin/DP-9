@@ -1,6 +1,10 @@
-// TC: O(n log n)
-// SC: O(n)
+// Time Complexity : O(n log n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
 
+
+// Your code here along with comments explaining your approach
 // 1: We maintain an effective array that contains the length of the maximum subsequence thus calculated and only holds useful elements
 // 2: If we can extend the maximum subsequence, we add to the effective array, else replace the element using Binary Search
 // 3: Once we have iterated through the main array, we return the length of the effective array
